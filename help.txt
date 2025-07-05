@@ -14,3 +14,12 @@ data.cpp
 需要调用数据范围时调用 v["/*变量名*/"].first & ["/*变量名*/"].second
 
 输出的数据文件储存在 data 文件夹下与题目同名子文件夹中
+
+function.hpp
+内置了一些常用的函数
+int rd(int l,int r);//生成 l~r 随机整数
+vector<pair<int, int>> BuildTree(int n);//生成一棵无权树
+vector<pair<int, pair<int, int>>> BuildWeightedTree(int n, int minW, int maxW);//生成一棵带权树
+int find(vector<int>& parent, int x);//并查集查找
+void unite(vector<int>& parent, int x, int y);//并查集合并
+string st(string name,int n);//生成数据文件名
