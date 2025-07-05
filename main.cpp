@@ -1,13 +1,18 @@
 #include<bits/stdc++.h> 
-#include "function.hpp"  
 using namespace std; 
 ifstream fin("data.txt");
 int cnt; 
+string st(string name,int n)
+{
+	name="data/"+name+"/"+name;
+	name+=to_string(n);
+	return name;
+}
 bool isFileExists_ifstream(const string& name) {
 	ifstream f(name.c_str());
 	return f.good();
 }
-signed main() 
+int main() 
 { 
 	system("@echo off"); 
 	//system("Cd !cd!");//填入文件目录
