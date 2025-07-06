@@ -9,26 +9,10 @@ map<string,pair<int,int>>v;
 map<string,int>vv; 
 string s[100005]; 
 
-int rd(int l,int r) { 
-	int x=l+rand()%(r-l+1); 
-	return x; 
-} 
-
-string st(string name,int n) { 
-	name="data/"+name+"/"+name; 
-	name+=to_string(n); 
-	name+=".in"; 
-	return name; 
-} 
-
-// 创建文件夹函数 
-void createDirectory(const string& path) { 
-	if (_mkdir(path.c_str()) == -1) { 
-		if (errno != EEXIST) { 
-			cerr << "Failed to create directory: " << path << endl; 
-		} 
-	} 
-} 
+int v_rd(string s) {
+	int l=v[s].first,r=v[s].second;
+	return rd(l,r); 
+}
 
 signed main() { 
 	struct _timeb T; 
@@ -43,32 +27,30 @@ signed main() {
 	fin>>name>>n>>m; 
 	for(int i=1;i<=n;i++) { 
 		int t; 
-		fin>>t; 
+		fin>>t;
 		for(int j=1;j<=m;j++) { 
 			int l,r; 
 			fin>>s[j]>>l>>r; 
-			v[s[j]]={l,r}; 
-		} 
+			v[s[j]]={l,r};
+		}
 		while(t-- >0) { 
 			++cnt; 
 			string dirPath = "data/" + name; 
 			createDirectory("data");  // 创建 data 文件夹 
-			createDirectory(dirPath);  // 创建 data/name 文件夹 
+			createDirectory(dirPath);  // 创建 data/name 文件夹
 			
-			freopen(st(name,cnt).c_str(),"w",stdout); 
 			for(int j=1;j<=m;j++) { 
-				vv[s[j]]=rd(v[s[j]].first,v[s[j]].second); 
-			} 
-			while(vv["n"]<=vv["m"])vv["n"]=rd(v["n"].first,v["n"].second); 
+				vv[s[j]]=v_rd(s[j]);
+			}
+			freopen((st(name,cnt)+".in").c_str(),"w",stdout); 
 			//只需要修改以下内容------------------------------ 
-			for(int j=1;j<=m;j++) { 
-				vv[s[j]]=rd(v[s[j]].first,v[s[j]].second); 
-			} 
-			cout<<vv["n"]<<endl; 
-			vector<pair<int, int>> roads = generateTree(vv["n"]); 
-			for (const auto& road : roads) { 
-				cout << road.first   << " " << road.second  <<" "<<rd(1,1000) << endl; 
-			} 
+			cout<<vv["t"]<<endl;
+			for(int i=1;i<=vv["t"];i++)
+			{
+				int l=v_rd("l"),r=v_rd("r");
+				while(l>r)r=v_rd("r");
+				cout<<l<<" "<<r<<endl;
+			}
 			//------------------------------------------------- 
 			fclose(stdout); 
 		} 
